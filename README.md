@@ -11,6 +11,13 @@ torch-scatter==2.0.9
 torch-sparse==0.6.12
 torch-spline-conv==1.2.1
 ogb==1.3.5
+typed-argument-parser==1.7.2
+gdown==4.6.0
+tensorboard==2.10.1
+ruamel-yaml==0.17.21
+cilog==1.2.3
+munch==2.5.0
+rdkit==2020.09.1.0
 ```
 
 ## Preparations
