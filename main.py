@@ -135,6 +135,8 @@ def main(args, trail):
                             use_linear=args.use_linear,
                             graphon=args.graphon,
                             N=int(median_num_nodes)).to(device)
+    model.ratio = torch.nn.Parameter(torch.tensor(0.5), requires_grad=True)
+
     if args.save_model and trail==1:
         torch.save([args, num_class, in_dim, num_layer, int(median_num_nodes)], "./run/{}-{}-{}-args.pt".format(args.time, args.dataset, args.domain))
     optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.l2reg)
@@ -171,6 +173,9 @@ def main(args, trail):
             batch = batch.to(device)
             model.train()
             out = model(batch, epoch=epoch)
+            r = torch.min(out['causal']['edge_key'].mean(), model.ratio)
+            r_real = out['causal']['edge_key'].mean() # learned causal feature ratio, check this each epoch
+            
             pred = out['pred_cau'].max(1)[1]
             correct += pred.eq(batch.y.view(-1)).sum().item()
             optimizer.zero_grad()
@@ -183,7 +188,7 @@ def main(args, trail):
                 else:
                     inv_loss = 0
                 env_loss = F.kl_div(F.log_softmax(out['pred_env'], dim=-1), uniform_target, reduction='batchmean')
-                gra_loss = out['graphon_loss']
+                gra_loss = out['graphon_loss'] + 1.0 * (r-model.ratio) ** 2
                 reg_loss = out['cau_loss_reg']
                 loss = args.cau * cau_loss + args.env * env_loss + args.gra * gra_loss + args.reg * reg_loss + args.inv * inv_loss
             else:
@@ -195,7 +200,7 @@ def main(args, trail):
                 else:
                     inv_loss = 0
                 env_loss = F.kl_div(F.log_softmax(out['pred_env'], dim=-1), uniform_target, reduction='batchmean')
-                gra_loss = out['graphon_loss']
+                gra_loss = out['graphon_loss'] + 1.0 * (r-model.ratio) ** 2
                 reg_loss = out['cau_loss_reg']
                 loss = args.cau * cau_loss + args.env * env_loss + args.gra * gra_loss + args.reg * reg_loss + args.inv * inv_loss
             loss.backward()
@@ -205,7 +210,7 @@ def main(args, trail):
             InvLo += inv_loss
             GraLo += gra_loss
             if step % show == 0:
-                print("Ep:[{}/{}] TrIter:[{:<3}/{}] Lo:[{:.4f}]".format(epoch, args.epochs, step, len(train_loader), total_loss / (step + 1)))
+                print("Ep:[{}/{}] TrIter:[{:<3}/{}] Lo:[{:.4f}] R:[{:.8f}]".format(epoch, args.epochs, step, len(train_loader), total_loss / (step + 1), model.ratio))
         
         train_result = correct / len(train_loader.dataset)
         epoch_loss = total_loss / len(train_loader)
