@@ -1,5 +1,5 @@
-# Multi-Grained Invariant Learning for Generalizable Graph Classification
-We provide a detailed code for Multi-Grained Invariant Learning for Generalizable Graph Classification.
+# A Unified Invariant Learning Framework for Graph Classification
+We provide a detailed code for UIL.
 
 ## Installations
 Main packages: PyTorch, Pytorch Geometric, OGB.
@@ -29,8 +29,7 @@ Create a folder ```dataset```, and then put the datasets into ```dataset```. The
  We use the NVIDIA GeForce RTX 3090 (24GB GPU) to conduct all our experiments.
  To run the code on CMNIST, please use the following command:
  ```
-CUDA_VISIBLE_DEVICES=$GPU python -u main.py \
---dataset cmnist
+CUDA_VISIBLE_DEVICES=$GPU python -u main.py --dataset cmnist
 
 ```
 
