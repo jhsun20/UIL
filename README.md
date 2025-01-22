@@ -1,5 +1,9 @@
 # A Unified Invariant Learning Framework for Graph Classification
-We provide a detailed code for UIL.
+Implementation for Causal Attention for Interpretable and Generalizable Graph Classification
+
+Yongduo Sui, Jie Sun, Shuyao Wang, Zemin Liu, Qing Cui, Longfei Li, Xiang Wang
+
+In KDD 2025
 
 ## Installations
 Main packages: PyTorch, Pytorch Geometric, OGB.
