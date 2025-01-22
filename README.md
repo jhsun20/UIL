@@ -1,5 +1,5 @@
 # A Unified Invariant Learning Framework for Graph Classification
-Implementation for Causal Attention for Interpretable and Generalizable Graph Classification
+PyTorch implementation for "A Unified Invariant Learning Framework for Graph Classification"
 
 Yongduo Sui, Jie Sun, Shuyao Wang, Zemin Liu, Qing Cui, Longfei Li, Xiang Wang
 
