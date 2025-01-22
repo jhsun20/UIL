@@ -25,7 +25,7 @@ rdkit==2020.09.1.0
 ```
 
 ## Preparations
-Please download the graph OOD datasets and OGB datasets as described in the original paper. 
+Please download the graph OOD datasets (https://github.com/divelab/GOOD) and OGB datasets as described in the original paper. 
 Create a folder ```dataset```, and then put the datasets into ```dataset```. Then modify the path by specifying ```--data_dir your/path/dataset```.
 
 
