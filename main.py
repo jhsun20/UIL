@@ -1,3 +1,11 @@
+import os
+os.environ.setdefault("OMP_NUM_THREADS", "1")
+import warnings
+warnings.filterwarnings(
+    "ignore",
+    category=FutureWarning,
+    module="sklearn.cluster._kmeans"
+)
 import torch
 from torch_geometric.loader import DataLoader
 from ogb.graphproppred import Evaluator

@@ -81,7 +81,7 @@ class GOODHIV(InMemoryDataset):
         self.domain = domain
         self.metric = 'ROC-AUC'
         self.task = 'Binary classification'
-        self.url = 'https://drive.google.com/file/d/1GNc0HUee5YQH4Vtlk8ZbDjyJBYTEyabo/view?usp=sharing'
+        self.url = 'https://drive.google.com/file/d/1CoOqYCuLObnG5M0D8a2P2NyL61WjbCzo/view?usp=sharing'
 
         self.generate = generate
 
