@@ -11,6 +11,8 @@ from GOOD.data.good_datasets.good_cmnist import GOODCMNIST
 from GOOD.data.good_datasets.good_motif import GOODMotif
 from GOOD.data.good_datasets.good_hiv import GOODHIV
 from GOOD.data.good_datasets.good_pcba import GOODPCBA
+from GOOD.data.good_datasets.good_twitter import GOODTwitter
+from GOOD.data.good_datasets.good_sst2 import GOODSST2
 import random
 from gnn2 import GINNet
 from model import CausalGraphon
@@ -85,6 +87,27 @@ def print_data(args):
         cri = criterion1
         eval_name = None
         test_batch_size = args.batch_size
+
+    elif args.dataset == "twitter":
+        dataset, meta_info = GOODTwitter.load(args.data_dir, domain=args.domain, shift=args.shift, generate=False)
+        num_class = 3
+        num_layer = 3
+        in_dim = 768
+        eval_metric = "rocauc"
+        cri = criterion1
+        eval_name = None
+        test_batch_size = args.batch_size
+
+    elif args.dataset == "sst2":
+        dataset, meta_info = GOODSST2.load(args.data_dir, domain=args.domain, shift=args.shift, generate=False)
+        num_class = 1
+        num_layer = 3
+        in_dim = 768
+        eval_metric = "rocauc"
+        cri = criterion1
+        eval_name = None
+        test_batch_size = args.batch_size
+
 
     elif args.dataset == "hiv":
         dataset, meta_info = GOODHIV.load(args.data_dir, domain=args.domain, shift=args.shift, generate=False)
