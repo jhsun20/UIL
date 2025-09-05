@@ -294,7 +294,7 @@ if __name__ == "__main__":
         
         parser.add_argument('--seed', type=int,   default=666)
         parser.add_argument('--device', type=int, default=0, help='which gpu to use if any (default: 0)')
-        parser.add_argument('--data_dir', type=str, default="../dataset", help="dataset path")
+        parser.add_argument('--data_dir', type=str, default="../UIL/dataset", help="dataset path")
         parser.add_argument('--dataset', type=str, default="hiv")
         parser.add_argument('--domain', type=str, default='color', help='basis, size, scaffold, color')
         parser.add_argument('--shift', type=str, default='covariate', help='concept or covariate')
